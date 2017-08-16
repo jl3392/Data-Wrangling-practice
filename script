@@ -1,0 +1,10 @@
+import pandas as pd
+import numpy as np
+from io import StringIO
+import json
+from pandas.io.json import json_normalize
+with open('data/world_bank_projects.json')as f:
+    raw=json.load(f)
+    df_themes=json_normalize(raw,'mjtheme_namecode',['id'])
+    df_themes.groupby('id').code.nunique().sort_values(ascending=False).head(10)
+    
